@@ -15,7 +15,7 @@
     "pretest:examples": "npm pack",
     "test:examples": "mocha --opts config/mocha.opts integration-tests/examples.test.ts"
   },
-  "main": "build/index.js",
+  "main": "src/index.tsx",
   "types": "build/index.d.ts",
   "author": {
     "name": "Realm",
