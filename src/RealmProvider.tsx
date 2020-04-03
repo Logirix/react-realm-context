@@ -17,7 +17,11 @@
 ////////////////////////////////////////////////////////////////////////////
 
 import * as equal from 'fast-deep-equal';
-import * as memoizeOne from 'memoize-one';
+import * as memoizeOneModule from "memoize-one";
+const memoizeOne =
+  typeof memoizeOneModule.default === "function"
+    ? memoizeOneModule.default
+    : memoizeOneModule;
 import * as React from 'react';
 import * as Realm from 'realm';
 
@@ -76,8 +80,8 @@ export const generateRealmProvider = (
       const { children, updateOnChange, realm, ...config } = this.props;
       if (realm){
         this.realm = realm
-      } else {
-         realm = this.memoizedRealm(config);
+      } else if (config) {
+        this.realm = this.memoizedRealm(config);
       }
       
       // Register the change listeners if asked to and they were not already there
