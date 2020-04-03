@@ -16,7 +16,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-import * as memoizeOne from 'memoize-one';
+import * as memoizeOneModule from "memoize-one";
+const memoizeOne =
+  typeof memoizeOneModule.default === "function"
+    ? memoizeOneModule.default
+    : memoizeOneModule;
 import * as React from 'react';
 import * as Realm from 'realm';
 
@@ -59,7 +63,8 @@ export const generateRealmQuery = (
 ): React.ComponentType<IRealmQueryProps<any>> => {
   class RealmQuery<T> extends React.Component<IRealmQueryProps<T>> {
     private results?: Realm.Results<T>;
-    private memoizedResults = (realm: Realm, type: string, filter: Filtering, sort: Sorting) => {
+    private memoizedResults = memoizeOne(
+      (realm: Realm, type: string, filter: Filtering, sort: Sorting) => {
         // Forget any results we have already returned
         this.forgetResults();
 
@@ -104,9 +109,8 @@ export const generateRealmQuery = (
 
         // Return
         return results;
-      }
-
-    // );
+      },
+    );
 
     // TODO: Add propTypes for non-TypeScript users
     // TODO: Allow the query to take a custom consumer as a prop
