@@ -72,8 +72,13 @@ export const generateRealmProvider = (
      * Renders the component.
      */
     public render() {
-      const { children, updateOnChange, ...config } = this.props;
-      const realm = this.memoizedRealm(config);
+      const { children, updateOnChange, realm, ...config } = this.props;
+      if (realm){
+        this.realm = realm
+      } else {
+         realm = this.memoizedRealm(config);
+      }
+      
       // Register the change listeners if asked to and they were not already there
       if (updateOnChange && !this.changeListenersAdded) {
         this.addChangeListeners(realm);
