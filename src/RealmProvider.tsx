@@ -34,6 +34,7 @@ type RealmRenderer = (context: IRealmContext) => React.ReactChild;
 export interface IRealmProviderProps extends Realm.Configuration {
   children: React.ReactNode | RealmRenderer;
   updateOnChange?: boolean;
+  realm?: Realm
 }
 
 /**
