@@ -59,8 +59,7 @@ export const generateRealmQuery = (
 ): React.ComponentType<IRealmQueryProps<any>> => {
   class RealmQuery<T> extends React.Component<IRealmQueryProps<T>> {
     private results?: Realm.Results<T>;
-    private memoizedResults = memoizeOne(
-      (realm: Realm, type: string, filter: Filtering, sort: Sorting) => {
+    private memoizedResults = (realm: Realm, type: string, filter: Filtering, sort: Sorting) => {
         // Forget any results we have already returned
         this.forgetResults();
 
@@ -105,8 +104,9 @@ export const generateRealmQuery = (
 
         // Return
         return results;
-      },
-    );
+      }
+
+    // );
 
     // TODO: Add propTypes for non-TypeScript users
     // TODO: Allow the query to take a custom consumer as a prop
