@@ -103,7 +103,6 @@ export const generateRealmProvider = (
       if (!this.realm.isClosed) {
         // Ensure we don't register change listeners anymore
         this.removeChangeListeners(this.realm);
-        this.realm.close();
       }
       this.changeListenersAdded = false;
       delete this.realm;
