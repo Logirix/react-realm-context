@@ -16,7 +16,6 @@
     "test:examples": "mocha --opts config/mocha.opts integration-tests/examples.test.ts"
   },
   "main": "src/index.tsx",
-  "types": "build/index.d.ts",
   "author": {
     "name": "Realm",
     "email": "help@realm.io",
